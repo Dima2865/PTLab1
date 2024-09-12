@@ -23,7 +23,7 @@ def main():
     # rating = CalcRating(students).calc()
     # print("Rating: ", rating)
 
-    print("-------------------New functional-------------------------")
+    print("-------------------New functional------------------------")
     readerJson = TextDataReaderJson()
     studentsJson = readerJson.read(path)
     print("Students: ", studentsJson)

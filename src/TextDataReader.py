@@ -1,3 +1,5 @@
+from abc import ABC
+
 from Types import DataType
 from DataReader import DataReader, DataReaderJson
 import json
@@ -21,7 +23,7 @@ class TextDataReader(DataReader):
         return self.students
 
 
-class TextDataReaderJson(DataReader):
+class TextDataReaderJson(DataReaderJson, ABC):
     def __init__(self) -> None:
         self.students: DataType = {}
 

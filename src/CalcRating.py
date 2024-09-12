@@ -32,8 +32,7 @@ class CalcRatingJson:
             for subject, score in scores.items():
                 total_score += score
 
-            # Проверяем, что у студента есть предметы с оценками,
-            # чтобы избежать деления на ноль
+            # Проверяем, что у студента есть предметы с оценками, чтобы избежать деления на ноль
             if scores:
                 self.ratingJson[key] = total_score / len(scores)
             else:

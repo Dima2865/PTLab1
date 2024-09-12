@@ -12,3 +12,4 @@ class DataReaderJson(DataReader):
     @abstractmethod
     def read_json(self, path: str) -> DataTypeJson:
         pass
+
