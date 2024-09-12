@@ -1,5 +1,6 @@
 from Types import DataType
-from DataReader import DataReader
+from DataReader import DataReader, DataReaderJson
+import json
 
 
 class TextDataReader(DataReader):
@@ -17,4 +18,14 @@ class TextDataReader(DataReader):
                     subj, score = line.split(":", maxsplit=1)
                     self.students[self.key].append(
                         (subj.strip(), int(score.strip())))
+        return self.students
+
+
+class TextDataReaderJson(DataReader):
+    def __init__(self) -> None:
+        self.students: DataType = {}
+
+    def read(self, path: str) -> DataType:
+        with open(path, encoding='utf-8') as file:
+            self.students = json.load(file)
         return self.students

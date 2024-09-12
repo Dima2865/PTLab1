@@ -1,8 +1,8 @@
 import argparse
 import sys
 
-from CalcRating import CalcRating
-from TextDataReader import TextDataReader
+from CalcRating import CalcRating, CalcRatingJson
+from TextDataReader import TextDataReader, TextDataReaderJson
 
 
 def get_path_from_arguments(args) -> str:
@@ -16,12 +16,20 @@ def get_path_from_arguments(args) -> str:
 def main():
     path = get_path_from_arguments(sys.argv[1:])
 
-    reader = TextDataReader()
-    students = reader.read(path)
-    print("Students: ", students)
+    # reader = TextDataReader()
+    # students = reader.read(path)
+    # print("Students: ", students)
+    #
+    # rating = CalcRating(students).calc()
+    # print("Rating: ", rating)
 
-    rating = CalcRating(students).calc()
-    print("Rating: ", rating)
+    print("-------------------New functional-------------------------")
+    readerJson = TextDataReaderJson()
+    studentsJson = readerJson.read(path)
+    print("Students: ", studentsJson)
+
+    ratingJson = CalcRatingJson(studentsJson).calcJson()
+    print("Rating: ", ratingJson)
 
 
 if __name__ == "__main__":
