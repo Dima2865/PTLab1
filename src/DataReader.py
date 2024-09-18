@@ -8,8 +8,7 @@ class DataReader(ABC):
         pass
 
 
-class DataReaderJson(DataReader):
+class DataReaderJson(DataReader, ABC):
     @abstractmethod
-    def read_json(self, path: str) -> DataTypeJson:
+    def read(self, path: str) -> DataTypeJson:
         pass
-

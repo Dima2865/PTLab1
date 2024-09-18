@@ -1,6 +1,6 @@
 from abc import ABC
 
-from Types import DataType
+from Types import DataType, DataTypeJson
 from DataReader import DataReader, DataReaderJson
 import json
 
@@ -25,9 +25,9 @@ class TextDataReader(DataReader):
 
 class TextDataReaderJson(DataReaderJson, ABC):
     def __init__(self) -> None:
-        self.students: DataType = {}
+        self.students: DataTypeJson = {}
 
-    def read(self, path: str) -> DataType:
+    def read(self, path: str) -> DataTypeJson:
         with open(path, encoding='utf-8') as file:
             self.students = json.load(file)
         return self.students

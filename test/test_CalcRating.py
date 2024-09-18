@@ -1,11 +1,9 @@
 from src.Types import DataType, DataTypeJson
 from src.CalcRating import CalcRating, CalcRatingJson
 import pytest
-import json
+
 
 RatingsType = dict[str, float]
-
-RatingsTypeJson = dict[str, float]
 
 
 class TestCalcRating:
@@ -48,43 +46,48 @@ class TestCalcRating:
                                  abs=0.001) == input_data[1][student]
 
 
+# ----------------------------
+
 class TestCalcRatingJson:
     @pytest.fixture()
-    def input_data(self) -> tuple[DataTypeJson, RatingsTypeJson]:
-        # Представление данных в формате JSON
-        json_data = {
-            "Абрамов Петр Сергеевич": [
-                ("математика", 80),
-                ("русский язык", 76),
-                ("программирование", 100)
-            ],
-            "Петров Игорь Владимирович": [
-                ("математика", 61),
-                ("русский язык", 80),
-                ("программирование", 78),
-                ("литература", 97)
-            ]
+    def input_data(self) -> tuple[DataTypeJson, dict[str, float]]:
+        data: DataTypeJson = {
+            "Абрамов Петр Сергеевич": {
+                "математика": 80,
+                "русский язык": 76,
+                "программирование": 100
+            },
+            "Петров Игорь Владимирович": {
+                "математика": 61,
+                "русский язык": 80,
+                "программирование": 78,
+                "литература": 97
+            },
+            "Сидоров Алексей": {
+                "математика": 90  # Тест с одним предметом
+            },
+            "Кузнецова Анна": {}  # Тест с отсутствующими предметами
         }
 
-        # Конвертируем данные в JSON-строку
-        json_content = json.dumps(json_data, ensure_ascii=False)
-
-        # Ожидаемые рейтинговые оценки
-        rating_scores: RatingsTypeJson = {
+        expected_ratings = {
             "Абрамов Петр Сергеевич": 85.3333,
-            "Петров Игорь Владимирович": 79.0000
+            "Петров Игорь Владимирович": 79.0,
+            "Сидоров Алексей": 90.0,
+            "Кузнецова Анна": 0.0
         }
 
-        return json.loads(json_content), rating_scores
+        return data, expected_ratings
 
-    def test_init_calc_rating(self, input_data: tuple[DataTypeJson, RatingsTypeJson]) -> None:
-        # Инициализируем CalcRating и проверяем корректность данных
+    def test_init_calc_rating_json(self, input_data: tuple[
+                DataTypeJson, dict[str, float]]) -> None:
         calc_rating = CalcRatingJson(input_data[0])
-        assert input_data[0] == calc_rating.dataJson
+        assert input_data[0] == calc_rating.data
 
-    def test_calc(self, input_data: tuple[DataTypeJson, RatingsTypeJson]) -> None:
-        # Проверяем корректность расчета рейтингов
-        rating = CalcRatingJson(input_data[0]).calc()
-        for student in rating.keys():
-            rating_score = rating[student]
-            assert pytest.approx(rating_score, abs=0.001) == input_data[1][student]
+    def test_calc_json(self, input_data: tuple[
+                DataTypeJson, dict[str, float]]) -> None:
+        calc_rating = CalcRatingJson(input_data[0])
+        ratings = calc_rating.calc_json()
+        for student in ratings.keys():
+            rating_score = ratings[student]
+            assert pytest.approx(rating_score,
+                                 abs=0.001) == input_data[1][student]

@@ -28,7 +28,7 @@ def main():
     studentsJson = readerJson.read(path)
     print("Students: ", studentsJson)
 
-    ratingJson = CalcRatingJson(studentsJson).calcJson()
+    ratingJson = CalcRatingJson(studentsJson).calc_json()
     print("Rating: ", ratingJson)
 
 

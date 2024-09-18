@@ -2,8 +2,6 @@ from Types import DataType, DataTypeJson
 
 RatingType = dict[str, float]
 
-RatingTypeJson = dict[str, float]
-
 
 class CalcRating:
     def __init__(self, data: DataType) -> None:
@@ -19,23 +17,27 @@ class CalcRating:
         return self.rating
 
 
+RatingTypeJson = dict[str, float]
+
+
 class CalcRatingJson:
     def __init__(self, data: DataTypeJson) -> None:
-        self.dataJson: DataTypeJson = data
-        self.ratingJson: RatingTypeJson = {}
+        self.data: DataTypeJson = data
+        self.rating: RatingTypeJson = {}
 
-    def calcJson(self) -> RatingTypeJson:
-        for key in self.dataJson:
-            scores = self.dataJson[key]
+    def calc_json(self) -> RatingTypeJson:
+        for key in self.data:
+            scores = self.data[key]
             total_score = 0.0
 
             for subject, score in scores.items():
                 total_score += score
 
-            # Проверяем, что у студента есть предметы с оценками, чтобы избежать деления на ноль
+            # Проверяем, что у студента есть предметы
+            # с оценками, чтобы избежать деления на ноль
             if scores:
-                self.ratingJson[key] = total_score / len(scores)
+                self.rating[key] = total_score / len(scores)
             else:
-                self.ratingJson[key] = 0.0  # Если предметов нет, рейтинг 0.0
+                self.rating[key] = 0.0  # Если предметов нет, рейтинг 0.0
 
-        return self.ratingJson
+        return self.rating
