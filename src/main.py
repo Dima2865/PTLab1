@@ -1,7 +1,7 @@
 import argparse
 import sys
 
-from CalcRating import CalcRating, CalcRatingJson
+from CalcRating import CalcRating, CalcRatingJson, CalculateLowScores
 from TextDataReader import TextDataReader, TextDataReaderJson
 
 
@@ -15,7 +15,7 @@ def get_path_from_arguments(args) -> str:
 
 def main():
     path = get_path_from_arguments(sys.argv[1:])
-
+    #
     # reader = TextDataReader()
     # students = reader.read(path)
     # print("Students: ", students)
@@ -24,12 +24,18 @@ def main():
     # print("Rating: ", rating)
 
     print("-------------------New functional------------------------")
+
     readerJson = TextDataReaderJson()
     studentsJson = readerJson.read(path)
     print("Students: ", studentsJson)
-
     ratingJson = CalcRatingJson(studentsJson).calc_json()
     print("Rating: ", ratingJson)
+
+    print("--------------Проверка на академ. долги-------------------")
+
+    calculator = CalculateLowScores(studentsJson)
+    result = calculator.count_students_with_low_scores()
+    print(f'Студенты с баллом <61 хотя бы по одному предмету: {result}')
 
 
 if __name__ == "__main__":

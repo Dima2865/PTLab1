@@ -1,8 +1,10 @@
 from Types import DataType, DataTypeJson
 
 RatingType = dict[str, float]
+RatingTypeJson = dict[str, float]
 
 
+# Исходный класс для вывода рейтинга
 class CalcRating:
     def __init__(self, data: DataType) -> None:
         self.data: DataType = data
@@ -17,9 +19,7 @@ class CalcRating:
         return self.rating
 
 
-RatingTypeJson = dict[str, float]
-
-
+# Класс для вывода рейтинга из json файла
 class CalcRatingJson:
     def __init__(self, data: DataTypeJson) -> None:
         self.data: DataTypeJson = data
@@ -41,3 +41,20 @@ class CalcRatingJson:
                 self.rating[key] = 0.0  # Если предметов нет, рейтинг 0.0
 
         return self.rating
+
+
+# Класс подсчитывающий студентов, у которых балл меньше 61
+class CalculateLowScores:
+    def __init__(self, data: DataTypeJson) -> None:
+        self.data: DataTypeJson = data
+
+    def count_students_with_low_scores(self) -> int:
+        count = 0
+
+        # Перебираем каждого студента
+        for student_scores in self.data.values():
+            # Проверяем, есть ли хотя бы одна оценка < 61
+            if any(score < 61 for score in student_scores.values()):
+                count += 1
+
+        return count

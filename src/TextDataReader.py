@@ -1,5 +1,4 @@
 from abc import ABC
-
 from Types import DataType, DataTypeJson
 from DataReader import DataReader, DataReaderJson
 import json

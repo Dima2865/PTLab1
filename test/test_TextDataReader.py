@@ -33,13 +33,11 @@ class TestTextDataReader:
         file_content = TextDataReader().read(filepath_and_data[0])
         assert file_content == filepath_and_data[1]
 
-# /////////////////
 
-
+# Тест класса TextDataReaderJson
 class TestTextDataReaderJson:
     @pytest.fixture()
     def json_data_content(self) -> tuple[str, DataTypeJson]:
-        # Пример JSON-строки, которая соответствует вашему формату
         json_content = json.dumps({
             "Андреев Андрей Евгеньевич": {
                 "математика": 100,
@@ -67,6 +65,8 @@ class TestTextDataReaderJson:
         return json_content, data
 
     @pytest.fixture()
+    # Тест на проверку корректности создания
+    # json файла и записи в него данных
     def json_filepath_and_data(self, json_data_content: tuple[
             str, DataTypeJson], tmpdir) -> tuple[str, DataTypeJson]:
         # Создаем временный файл JSON и записываем в него данные
@@ -74,6 +74,7 @@ class TestTextDataReaderJson:
         p.write_text(json_data_content[0], encoding='utf-8')
         return str(p), json_data_content[1]
 
+    # Тест на проверку корректности чтения данных из json файла
     def test_read_json(self, json_filepath_and_data: tuple[
             str, DataTypeJson]) -> None:
         # Создаем экземпляр TextDataReaderJson и читаем данные из файла
