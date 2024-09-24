@@ -22,3 +22,13 @@
 
 ![image](https://github.com/user-attachments/assets/25414669-721e-49e9-8ac5-fb7c138aacac)
 ![image](https://github.com/user-attachments/assets/92ebec37-ab98-4f69-9b9f-d1b83afbdb7e)
+
+C:\Users\d222a\University\Technologii programmirovania\TP_lab_1_git
+
+pycodestyle.exe src test
+
+$env:PYTHONPATH = "./;./src"
+
+pytest.exe test
+
+python.exe src\main.py -p data\data.txt
