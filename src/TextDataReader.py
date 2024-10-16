@@ -4,6 +4,7 @@ from DataReader import DataReader, DataReaderJson
 import json
 
 
+# Класс считывающий данные из .txt файла
 class TextDataReader(DataReader):
     def __init__(self) -> None:
         self.key: str = ""
@@ -22,6 +23,8 @@ class TextDataReader(DataReader):
         return self.students
 
 
+# Класс считывающий данные из .json файла
+# (используется библиотека для работы с json)
 class TextDataReaderJson(DataReaderJson, ABC):
     def __init__(self) -> None:
         self.students: DataTypeJson = {}

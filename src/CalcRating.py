@@ -1,10 +1,12 @@
 from Types import DataType, DataTypeJson
 
+
+# словари для хранения имени студентов и еих среднего балла по предметам
 RatingType = dict[str, float]
 RatingTypeJson = dict[str, float]
 
 
-# Исходный класс для вывода рейтинга
+# Исходный класс для подсчета рейтинга
 class CalcRating:
     def __init__(self, data: DataType) -> None:
         self.data: DataType = data
@@ -19,7 +21,7 @@ class CalcRating:
         return self.rating
 
 
-# Класс для вывода рейтинга из json файла
+# Класс для расчета рейтинга из json файла
 class CalcRatingJson:
     def __init__(self, data: DataTypeJson) -> None:
         self.data: DataTypeJson = data
@@ -38,7 +40,8 @@ class CalcRatingJson:
             if scores:
                 self.rating[key] = total_score / len(scores)
             else:
-                self.rating[key] = 0.0  # Если предметов нет, рейтинг 0.0
+                # Если предметов нет, рейтинг 0.0
+                self.rating[key] = 0.0
 
         return self.rating
 
