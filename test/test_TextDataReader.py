@@ -1,6 +1,8 @@
 import pytest
-from src.Types import DataType
+from src.Types import DataType, DataTypeJson
 from src.TextDataReader import TextDataReader
+from src.TextDataReaderJson import TextDataReaderJson
+import json
 
 
 class TestTextDataReader:
@@ -31,3 +33,53 @@ class TestTextDataReader:
     def test_read(self, filepath_and_data: tuple[str, DataType]) -> None:
         file_content = TextDataReader().read(filepath_and_data[0])
         assert file_content == filepath_and_data[1]
+
+
+# Тест класса TextDataReaderJson
+class TestTextDataReaderJson:
+    @pytest.fixture()
+    def json_data_content(self) -> tuple[str, DataTypeJson]:
+        json_content = json.dumps({
+            "Андреев Андрей Евгеньевич": {
+                "математика": 100,
+                "программирование": 90,
+                "литература": 100
+            },
+            "Петров Сергей Александрович": {
+                "математика": 100,
+                "социология": 90,
+                "химия": 91
+            }
+        })
+        data = {
+            "Андреев Андрей Евгеньевич": {
+                "математика": 100,
+                "программирование": 90,
+                "литература": 100
+            },
+            "Петров Сергей Александрович": {
+                "математика": 100,
+                "социология": 90,
+                "химия": 91
+            }
+        }
+        return json_content, data
+
+    @pytest.fixture()
+    # Тест на проверку корректности создания
+    # json файла и записи в него данных
+    def json_filepath_and_data(self, json_data_content: tuple[
+            str, DataTypeJson], tmpdir) -> tuple[str, DataTypeJson]:
+        # Создаем временный файл JSON и записываем в него данные
+        p = tmpdir.mkdir("datadir").join("my_data.json")
+        p.write_text(json_data_content[0], encoding='utf-8')
+        return str(p), json_data_content[1]
+
+    # Тест на проверку корректности чтения данных из json файла
+    def test_read_json(self, json_filepath_and_data: tuple[
+            str, DataTypeJson]) -> None:
+        # Создаем экземпляр TextDataReaderJson и читаем данные из файла
+        reader = TextDataReaderJson()
+        file_content = reader.read(json_filepath_and_data[0])
+        # Сравниваем считанные данные с ожидаемыми
+        assert file_content == json_filepath_and_data[1]

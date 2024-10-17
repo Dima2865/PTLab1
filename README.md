@@ -23,16 +23,24 @@
 ![image](https://github.com/user-attachments/assets/25414669-721e-49e9-8ac5-fb7c138aacac)
 ![image](https://github.com/user-attachments/assets/92ebec37-ab98-4f69-9b9f-d1b83afbdb7e)
 
-<<<<<<< HEAD
+
+# Диаграмма классов
+
+![ClassDiagram1](https://github.com/user-attachments/assets/331c52a3-f810-4789-a451-5a024477776e)
+![ClassDiagram2](https://github.com/user-attachments/assets/14db2aa4-5ad6-4f3b-a589-7bba9d0c60a0)
+
+
 C:\Users\d222a\University\Technologii programmirovania\TP_lab_1_git
-=======
-C:\Users\d222a\University\Technologii programmirovania\TP_lab_1_git
+
 
 pycodestyle.exe src test
 
+
 $env:PYTHONPATH = "./;./src"
+
 
 pytest.exe test
 
+
 python.exe src\main.py -p data\data.txt
->>>>>>> a99fd60c7cb8fad97b7332f78233f4aae216703a
+
