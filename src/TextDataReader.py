@@ -1,7 +1,6 @@
 from abc import ABC
-from Types import DataType, DataTypeJson
-from DataReader import DataReader, DataReaderJson
-import json
+from Types import DataType
+from src.DataReader import DataReader
 
 
 # Класс считывающий данные из .txt файла
@@ -20,16 +19,4 @@ class TextDataReader(DataReader):
                     subj, score = line.split(":", maxsplit=1)
                     self.students[self.key].append(
                         (subj.strip(), int(score.strip())))
-        return self.students
-
-
-# Класс считывающий данные из .json файла
-# (используется библиотека для работы с json)
-class TextDataReaderJson(DataReaderJson, ABC):
-    def __init__(self) -> None:
-        self.students: DataTypeJson = {}
-
-    def read(self, path: str) -> DataTypeJson:
-        with open(path, encoding='utf-8') as file:
-            self.students = json.load(file)
         return self.students

@@ -1,8 +1,11 @@
 import argparse
 import sys
 
-from CalcRating import CalcRating, CalcRatingJson, CalculateLowScores
-from TextDataReader import TextDataReader, TextDataReaderJson
+from src.CalcRating import CalcRating
+from src.CalcRatingJson import CalcRatingJson
+from src.CalculateLowScores import CalculateLowScores
+from src.TextDataReader import TextDataReader
+from src.TextDataReaderJson import TextDataReaderJson
 
 
 def get_path_from_arguments(args) -> str:

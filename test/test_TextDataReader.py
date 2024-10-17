@@ -1,6 +1,7 @@
 import pytest
 from src.Types import DataType, DataTypeJson
-from src.TextDataReader import TextDataReader, TextDataReaderJson
+from src.TextDataReader import TextDataReader
+from src.TextDataReaderJson import TextDataReaderJson
 import json
 
 

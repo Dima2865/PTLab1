@@ -1,5 +1,7 @@
 from src.Types import DataType, DataTypeJson
-from src.CalcRating import CalcRating, CalcRatingJson, CalculateLowScores
+from src.CalcRating import CalcRating
+from src.CalcRatingJson import CalcRatingJson
+from src.CalculateLowScores import CalculateLowScores
 import pytest
 
 
@@ -47,7 +49,7 @@ class TestCalcRating:
 
 
 # ----------------------------
-# Тест класса CalcRatingJson
+# Тест класса CalcRatingJson.py
 class TestCalcRatingJson:
     @pytest.fixture()
     def input_data(self) -> tuple[DataTypeJson, dict[str, float]]:
@@ -97,7 +99,7 @@ class TestCalcRatingJson:
                                  abs=0.001) == input_data[1][student]
 
 
-# Тест класса alculateLowScores
+# Тест класса calculateLowScores
 class TestCalculateLowScores:
     @pytest.fixture()
     def input_data(self) -> tuple[DataTypeJson, int]:
